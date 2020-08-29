@@ -1,3 +1,4 @@
+import { QuotesService } from './../quotes.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuotesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private quotesService: QuotesService) { }
 
   ngOnInit(): void {
+    this.quotesService.getExchanges()
+      .subscribe(response => {
+        console.log('Exchanges:', response);
+      });
   }
 
 }
