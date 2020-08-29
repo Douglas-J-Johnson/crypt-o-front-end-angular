@@ -1,3 +1,3 @@
 export const apiKeys = {
-  finnhubAPIKey: "test"
+  finnhubAPIKey: "bt4pdvn48v6um6kgqe50"
 };

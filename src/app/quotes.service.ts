@@ -1,6 +1,6 @@
 import { apiKeys } from './../api_keys';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
@@ -9,23 +9,20 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class QuotesService {
   private quotesBaseURL = 'https://finnhub.io/api/v1/crypto/';
-  private requestOptions: any;
+  private apiKey = apiKeys.finnhubAPIKey;
 
   constructor(private httpClient: HttpClient) {
-    // httpHeaders = httpHeaders.append('X-Finnhub-Token', '');
-    // this.requestOptions = {headers: httpHeaders};
-    console.log(apiKeys);
   }
 
   getExchanges() {
-    return this.httpClient.get(`${this.quotesBaseURL}exchange?`, this.requestOptions);
+    return this.httpClient.get(`${this.quotesBaseURL}exchange?token=${this.apiKey}`);
   }
 
   getSymbols(exchange: string) {
-    return this.httpClient.get(`${this.quotesBaseURL}symbol?exchange=${exchange}`, this.requestOptions);
+    return this.httpClient.get(`${this.quotesBaseURL}symbol?exchange=${exchange}&token=${this.apiKey}`);
   }
 
   getCandles() {
-    return this.httpClient.get(`${this.quotesBaseURL}candle?`, this.requestOptions);
+    return this.httpClient.get(`${this.quotesBaseURL}candle?`);
   }
 }
