@@ -1,3 +1,4 @@
+import { apiKeys } from './../api_keys';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -10,9 +11,10 @@ export class QuotesService {
   private quotesBaseURL = 'https://finnhub.io/api/v1/crypto/';
   private requestOptions: any;
 
-  constructor(private httpClient: HttpClient, private httpHeaders: HttpHeaders) {
-    httpHeaders = httpHeaders.append('X-Finnhub-Token', '');
-    this.requestOptions = {headers: httpHeaders};
+  constructor(private httpClient: HttpClient) {
+    // httpHeaders = httpHeaders.append('X-Finnhub-Token', '');
+    // this.requestOptions = {headers: httpHeaders};
+    console.log(apiKeys);
   }
 
   getExchanges() {
