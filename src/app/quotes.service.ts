@@ -1,7 +1,7 @@
 import { apiKeys } from '../api-keys';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError} from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
@@ -14,15 +14,15 @@ export class QuotesService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getExchanges() {
+  getExchanges(): Observable<any> {
     return this.httpClient.get(`${this.quotesBaseURL}exchange?token=${this.apiKey}`);
   }
 
-  getSymbols(exchange: string) {
+  getSymbols(exchange: string): Observable<any> {
     return this.httpClient.get(`${this.quotesBaseURL}symbol?exchange=${exchange}&token=${this.apiKey}`);
   }
 
-  getCandles() {
+  getCandles(): Observable<any> {
     return this.httpClient.get(`${this.quotesBaseURL}candle?`);
   }
 }
