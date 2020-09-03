@@ -15,6 +15,21 @@ export class QuotesComponent implements OnInit {
 
   constructor(private quotesService: QuotesService) { }
 
+  private flattenSymbolsList(symbols: {}): any {
+    const flattenedSymbols = [];
+
+    Object.keys(symbols).forEach (exchange => {
+      const exchangeSymbols = symbols[exchange];
+      exchangeSymbols.forEach(exchangeSymbol => {
+        const flattenedSymbol = exchangeSymbol;
+        flattenedSymbol['exchange'] = exchange;
+        flattenedSymbols.push(flattenedSymbol);
+      });
+    });
+
+    return flattenedSymbols;
+  }
+
   ngOnInit(): void {
     this.quotesService.getExchanges()
       .subscribe(response => {
@@ -25,7 +40,11 @@ export class QuotesComponent implements OnInit {
 
         const symbolObservable = forkJoin(this.exchangeRequests);
         symbolObservable.subscribe({
-          next: value => console.log(value)
+          next: value => this.exchangeSymbols = this.flattenSymbolsList(value),
+          complete: () => {
+            console.log('Quotes Exchanges:', this.exchanges);
+            console.log('Quotes Symbols:', this.exchangeSymbols);
+          },
         });
       });
   }
