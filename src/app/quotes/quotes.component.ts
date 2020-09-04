@@ -1,7 +1,6 @@
 import { QuotesService } from './../quotes.service';
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { exhaust } from 'rxjs/operators';
 
 @Component({
   selector: 'app-quotes',
@@ -9,8 +8,8 @@ import { exhaust } from 'rxjs/operators';
   styleUrls: ['./quotes.component.css']
 })
 export class QuotesComponent implements OnInit {
-  private exchanges: string[];
-  private exchangeSymbols: {};
+  public exchanges: string[];
+  public exchangeSymbols: {};
   private exchangeRequests = {};
 
   constructor(private quotesService: QuotesService) { }
