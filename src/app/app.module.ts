@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QuotesComponent } from './quotes/quotes.component';
 import { ExhangesComponent } from './exhanges/exhanges.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { PortfolioPieChartComponent } from './portfolio-pie-chart/portfolio-pie-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuotesComponent,
-    ExhangesComponent
+    ExhangesComponent,
+    PortfolioComponent,
+    PortfolioPieChartComponent
   ],
   imports: [
     BrowserModule,
