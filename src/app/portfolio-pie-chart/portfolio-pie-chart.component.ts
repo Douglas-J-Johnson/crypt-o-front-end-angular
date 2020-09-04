@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-portfolio-pie-chart',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./portfolio-pie-chart.component.css']
 })
 export class PortfolioPieChartComponent implements OnInit {
+  @Input('allocations') allocations: {};
 
   constructor() { }
 
