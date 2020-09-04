@@ -9,24 +9,40 @@ import { forkJoin } from 'rxjs';
 })
 export class QuotesComponent implements OnInit {
   public exchanges: string[];
-  public exchangeSymbols: {};
+  public symbols: [];
+  public filteredSymbols: [];
   private exchangeRequests = {};
 
   constructor(private quotesService: QuotesService) { }
 
   private flattenSymbolsList(symbols: {}): any {
-    const flattenedSymbols = [];
+    const flattenedSymbolsList = [];
 
     Object.keys(symbols).forEach (exchange => {
       const exchangeSymbols = symbols[exchange];
       exchangeSymbols.forEach(exchangeSymbol => {
         const flattenedSymbol = exchangeSymbol;
         flattenedSymbol['exchange'] = exchange;
-        flattenedSymbols.push(flattenedSymbol);
+        flattenedSymbolsList.push(flattenedSymbol);
       });
     });
 
-    return flattenedSymbols;
+    return flattenedSymbolsList;
+  }
+
+  private filterSymbolByCurrency(symbols: [], currency: string): any {
+    currency = currency.toLowerCase();
+    const symbolsFilteredByCurrency = [];
+
+    symbols.forEach(symbol => {
+      const displaySymbol: string = symbol.displaySymbol;
+
+      if (displaySymbol.toLowerCase().includes(currency)) {
+        symbolsFilteredByCurrency.push(symbol);
+      }
+    });
+
+    return symbolsFilteredByCurrency;
   }
 
   ngOnInit(): void {
@@ -39,10 +55,9 @@ export class QuotesComponent implements OnInit {
 
         const symbolObservable = forkJoin(this.exchangeRequests);
         symbolObservable.subscribe({
-          next: value => this.exchangeSymbols = this.flattenSymbolsList(value),
+          next: value => this.symbols = this.flattenSymbolsList(value),
           complete: () => {
-            console.log('Quotes Exchanges:', this.exchanges);
-            console.log('Quotes Symbols:', this.exchangeSymbols);
+            this.filteredSymbols = this.filterSymbolByCurrency(this.symbols, 'USD');
           },
         });
       });
