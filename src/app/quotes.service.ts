@@ -17,7 +17,7 @@ export class QuotesService {
     return this.httpClient.get(`${this.quotesBaseURL}exchange?token=${this.apiKey}`);
   }
 
-  getSymbols(exchange: string): Observable<any> {
+  getCurrencies(exchange: string): Observable<any> {
     return this.httpClient.get(`${this.quotesBaseURL}symbol?exchange=${exchange}&token=${this.apiKey}`);
   }
 

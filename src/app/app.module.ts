@@ -9,6 +9,7 @@ import { QuotesComponent } from './quotes/quotes.component';
 import { ExhangesComponent } from './exhanges/exhanges.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { PortfolioPieChartComponent } from './portfolio-pie-chart/portfolio-pie-chart.component';
+import { CurrenciesComponent } from './currencies/currencies.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PortfolioPieChartComponent } from './portfolio-pie-chart/portfolio-pie-
     QuotesComponent,
     ExhangesComponent,
     PortfolioComponent,
-    PortfolioPieChartComponent
+    PortfolioPieChartComponent,
+    CurrenciesComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ExhangesComponent implements OnInit {
   @Input('exchanges') exchanges: [];
+  @Input('currencies') currencies: [];
 
   constructor() { }
 

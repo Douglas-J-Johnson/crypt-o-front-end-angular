@@ -9,40 +9,40 @@ import { forkJoin } from 'rxjs';
 })
 export class QuotesComponent implements OnInit {
   public exchanges: string[];
-  public symbols: [];
-  public filteredSymbols: [];
+  public currencies: [];
+  public filteredCurrencies: [];
   private exchangeRequests = {};
 
   constructor(private quotesService: QuotesService) { }
 
-  private flattenSymbolsList(symbols: {}): any {
-    const flattenedSymbolsList = [];
+  private flattenCurrenciesList(currencies: {}): any {
+    const flattenedCurrenciesList = [];
 
-    Object.keys(symbols).forEach (exchange => {
-      const exchangeSymbols = symbols[exchange];
-      exchangeSymbols.forEach(exchangeSymbol => {
-        const flattenedSymbol = exchangeSymbol;
-        flattenedSymbol['exchange'] = exchange;
-        flattenedSymbolsList.push(flattenedSymbol);
+    Object.keys(currencies).forEach (exchange => {
+      const exchangeCurrencies = currencies[exchange];
+      exchangeCurrencies.forEach(currency => {
+        const flattenedCurrency = currency;
+        flattenedCurrency['exchange'] = exchange;
+        flattenedCurrenciesList.push(flattenedCurrency);
       });
     });
 
-    return flattenedSymbolsList;
+    return flattenedCurrenciesList;
   }
 
-  private filterSymbolByCurrency(symbols: [], currency: string): any {
-    currency = currency.toLowerCase();
-    const symbolsFilteredByCurrency = [];
+  private filterCurrencyByBaseCurrency(currencies: [], baseCurrency: string): any {
+    baseCurrency = baseCurrency.toLowerCase();
+    const currenciesFilteredByBaseCurrency = [];
 
-    symbols.forEach(symbol => {
-      const displaySymbol: string = symbol.displaySymbol;
+    currencies.forEach(currency => {
+      const displaySymbol: string = currency['displaySymbol'];
 
-      if (displaySymbol.toLowerCase().includes(currency)) {
-        symbolsFilteredByCurrency.push(symbol);
+      if (displaySymbol.toLowerCase().includes(baseCurrency)) {
+        currenciesFilteredByBaseCurrency.push(currency);
       }
     });
 
-    return symbolsFilteredByCurrency;
+    return currenciesFilteredByBaseCurrency;
   }
 
   ngOnInit(): void {
@@ -50,14 +50,14 @@ export class QuotesComponent implements OnInit {
       .subscribe(response => {
         this.exchanges = response;
         this.exchanges.forEach(exchange => {
-          this.exchangeRequests[exchange] = this.quotesService.getSymbols(`${exchange}`);
+          this.exchangeRequests[exchange] = this.quotesService.getCurrencies(`${exchange}`);
         });
 
-        const symbolObservable = forkJoin(this.exchangeRequests);
-        symbolObservable.subscribe({
-          next: value => this.symbols = this.flattenSymbolsList(value),
+        const currencyObservable = forkJoin(this.exchangeRequests);
+        currencyObservable.subscribe({
+          next: value => this.currencies = this.flattenCurrenciesList(value),
           complete: () => {
-            this.filteredSymbols = this.filterSymbolByCurrency(this.symbols, 'USD');
+            this.filteredCurrencies = this.filterCurrencyByBaseCurrency(this.currencies, 'USD');
           },
         });
       });
