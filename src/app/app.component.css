@@ -1,0 +1,10 @@
+.app-body {
+  padding: 1.5rem;
+  background-color: seashell;
+  display: flex;
+  flex-direction: row;
+}
+
+app-quotes {
+  width: 50%;
+}

@@ -2,5 +2,25 @@
 
 html {
   font-family: 'Lato', sans-serif;
-  background-color: rgb(101, 194, 171);
+  background-color: rgb(151, 206, 192);
+}
+
+ul {
+  font-weight: 400;
+  list-style: none;
+  margin: 1rem;
+  padding: 0rem;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: rgb(151, 206, 192);
+  font-size: 1.5rem;
+  font-weight: 700;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 0.35rem;
+  margin: 1rem;
 }
