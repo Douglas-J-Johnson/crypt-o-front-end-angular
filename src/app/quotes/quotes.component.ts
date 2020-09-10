@@ -50,7 +50,7 @@ export class QuotesComponent implements OnInit {
       .subscribe(response => {
         response.forEach(exchange => {
           const exchangeName = exchange.toString();
-          this.exchanges.push({name: exchangeName, selected: true});
+          this.exchanges.push({name: exchangeName, isSelected: true});
           this.exchangeRequests[exchangeName] = this.quotesService.getCurrencies(exchangeName);
         });
 

@@ -1,17 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-exhanges',
   templateUrl: './exhanges.component.html',
   styleUrls: ['./exhanges.component.css']
 })
-export class ExhangesComponent implements OnInit {
+export class ExhangesComponent{
   @Input('exchanges') exchanges: [];
   @Input('currencies') currencies: [];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public setSelected(): void {
+    console.log('toggle');
   }
-
 }
