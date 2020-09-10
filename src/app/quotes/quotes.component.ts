@@ -8,7 +8,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./quotes.component.css']
 })
 export class QuotesComponent implements OnInit {
-  public exchanges: string[];
+  public exchanges = [];
   public currencies: [];
   public filteredCurrencies: [];
   private exchangeRequests = {};
@@ -48,9 +48,10 @@ export class QuotesComponent implements OnInit {
   ngOnInit(): void {
     this.quotesService.getExchanges()
       .subscribe(response => {
-        this.exchanges = response;
-        this.exchanges.forEach(exchange => {
-          this.exchangeRequests[exchange] = this.quotesService.getCurrencies(`${exchange}`);
+        response.forEach(exchange => {
+          const exchangeName = exchange.toString();
+          this.exchanges.push({name: exchangeName, selected: true});
+          this.exchangeRequests[exchangeName] = this.quotesService.getCurrencies(exchangeName);
         });
 
         const currencyObservable = forkJoin(this.exchangeRequests);
@@ -62,5 +63,4 @@ export class QuotesComponent implements OnInit {
         });
       });
   }
-
 }

@@ -16,7 +16,6 @@ li {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: rgb(151, 206, 192);
   font-size: 1.5rem;
   font-weight: 700;
   min-height: 2.5rem;

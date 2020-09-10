@@ -1,0 +1,7 @@
+.exchange-selected {
+  background-color: rgba(151, 206, 192, 1);
+}
+
+.exchange-deselected {
+  background-color: rgba(151, 206, 192, 0.4);
+}

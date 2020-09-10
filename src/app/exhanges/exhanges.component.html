@@ -1,5 +1,7 @@
 <ul>
-  <li *ngFor="let exchange of exchanges">
-    {{ exchange }}
+  <li *ngFor="let exchange of exchanges"
+    [class.exchange-selected]="exchange.selected"
+    [class.exchange-deselected]="!exchange.selected">
+    {{ exchange.name }}
   </li>
 </ul>
