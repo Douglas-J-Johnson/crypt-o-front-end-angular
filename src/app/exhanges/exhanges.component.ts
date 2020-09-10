@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-exhanges',
@@ -7,9 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class ExhangesComponent{
   @Input('exchanges') exchanges: [];
-  @Input('currencies') currencies: [];
+  // @Output() click = new EventEmitter();
 
-  public setSelected(): void {
-    console.log('toggle');
+  public setSelected(index): void {
+    this.exchanges[index].isSelected = !this.exchanges[index].isSelected
   }
 }

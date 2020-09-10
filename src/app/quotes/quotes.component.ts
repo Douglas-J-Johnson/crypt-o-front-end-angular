@@ -45,6 +45,10 @@ export class QuotesComponent implements OnInit {
     return currenciesFilteredByBaseCurrency;
   }
 
+  public toggleExhange(): void {
+    console.log('changing state.');
+  }
+
   ngOnInit(): void {
     this.quotesService.getExchanges()
       .subscribe(response => {

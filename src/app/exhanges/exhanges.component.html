@@ -1,8 +1,8 @@
 <ul>
-  <li *ngFor="let exchange of exchanges"
+  <li *ngFor="let exchange of exchanges; index as i"
     [class.exchange-selected]="exchange.isSelected"
     [class.exchange-deselected]="!exchange.isSelected"
-    (click)="setSelected()">
+    (click)="setSelected(i)">
     {{ exchange.name }}
   </li>
 </ul>
