@@ -45,8 +45,8 @@ export class QuotesComponent implements OnInit {
     return currenciesFilteredByBaseCurrency;
   }
 
-  public toggleExhange(): void {
-    console.log('changing state.');
+  public toggleExhange(index): void {
+    console.log(`Changing state of ${this.exchanges[index].name} to ${this.exchanges[index].isSelected}`);
   }
 
   ngOnInit(): void {

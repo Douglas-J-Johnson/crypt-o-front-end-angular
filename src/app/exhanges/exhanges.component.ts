@@ -7,9 +7,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ExhangesComponent{
   @Input('exchanges') exchanges: [];
-  // @Output() click = new EventEmitter();
+  @Output() click = new EventEmitter();
 
-  public setSelected(index): void {
-    this.exchanges[index].isSelected = !this.exchanges[index].isSelected
+  public setSelected($event, index): void {
+    $event.stopPropagation();
+    this.exchanges[index].isSelected = !this.exchanges[index].isSelected;
+    this.click.emit(index);
   }
 }
