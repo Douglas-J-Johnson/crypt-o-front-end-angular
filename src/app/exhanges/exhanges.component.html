@@ -1,5 +1,6 @@
 <ul>
   <li *ngFor="let exchange of exchanges; index as i"
+    class = "exchange"
     [class.exchange-selected]="exchange.isSelected"
     [class.exchange-deselected]="!exchange.isSelected"
     (click)="setSelected($event, i)">

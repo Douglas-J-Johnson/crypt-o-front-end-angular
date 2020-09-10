@@ -46,7 +46,7 @@ export class QuotesComponent implements OnInit {
   }
 
   public toggleExhange(index): void {
-    console.log(`Changing state of ${this.exchanges[index].name} to ${this.exchanges[index].isSelected}`);
+    // console.log(`Changing state of ${this.exchanges[index].name} to ${this.exchanges[index].isSelected}`);
   }
 
   ngOnInit(): void {

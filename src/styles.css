@@ -2,6 +2,7 @@
 
 html {
   font-family: 'Lato', sans-serif;
+  color: rgb(250, 250, 250);
   background-color: rgb(151, 206, 192);
 }
 
@@ -18,7 +19,7 @@ li {
   align-items: center;
   font-size: 1.5rem;
   font-weight: 700;
-  min-height: 2.5rem;
+  min-height: 2.0rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
   border-radius: 0.35rem;
   margin: 1rem;
