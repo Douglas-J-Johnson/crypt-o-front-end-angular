@@ -1,24 +1,35 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-exhanges',
   templateUrl: './exhanges.component.html',
   styleUrls: ['./exhanges.component.css']
 })
-export class ExhangesComponent  implements OnInit, OnChanges{
+export class ExhangesComponent{
   @Input('exchanges') exchanges: any;
   @Output() click = new EventEmitter();
   public allAreSelected: boolean;
   public noneAreSelected: boolean;
 
-  public setSelected($event, index: number): void {
+  public setSelected($event: Event, index: number): void {
     $event.stopPropagation();
     this.exchanges[index]['isSelected'] = !this.exchanges[index]['isSelected'];
     this.click.emit(index);
   }
 
-  public setBulkSelection(bulkSelection: string): void {
-    console.log(bulkSelection);
+  public setBulkSelection($event: Event, bulkSelectionAction: string): void {
+    $event.stopPropagation();
+
+    if (bulkSelectionAction === 'selectAll' && !this.allAreSelected) {
+      for (let i = 0; i < this.exchanges.length; i++) {
+        this.exchanges[i].isSelected = true;
+      }
+    }
+    if (bulkSelectionAction === 'selectNone' && !this.noneAreSelected) {
+      for (let i = 0; i < this.exchanges.length; i++) {
+        this.exchanges[i].isSelected = false;
+      }
+    }
   }
 
   public selectedCount(): number {
@@ -36,13 +47,5 @@ export class ExhangesComponent  implements OnInit, OnChanges{
     selected === total ? this.allAreSelected = true : this.allAreSelected = false;
 
     return selected;
-  }
-
-  ngOnInit(): void {
-    console.log('OnInit', this.selectedCount());
-  }
-
-  ngOnChanges(): void {
-    console.log('OnChanges', this.selectedCount());
   }
 }

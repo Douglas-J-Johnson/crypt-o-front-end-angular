@@ -9,14 +9,14 @@
       class="exchanges-bulk-selector"
       [class.selected]="!allAreSelected"
       [class.deselected]="allAreSelected"
-      (click)="setBulkSelection('selectAll')">
+      (click)="setBulkSelection($event, 'selectAll')">
       All
     </div>
     <div
       class="exchanges-bulk-selector"
       [class.selected]="!noneAreSelected"
       [class.deselected]="noneAreSelected"
-      (click)="setBulkSelection('selectNone')">
+      (click)="setBulkSelection($event, 'selectNone')">
       None
     </div>
   </div>
