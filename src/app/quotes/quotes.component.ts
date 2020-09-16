@@ -10,12 +10,14 @@ import { forkJoin } from 'rxjs';
 export class QuotesComponent implements OnInit {
   public exchanges = [];
   public rawCurrencies: [];
+  public baseCurrencyFilteredCurrencies: [];
   public filteredCurrencies: [];
+
   private exchangeRequests = {};
 
   constructor(private quotesService: QuotesService) { }
 
-  private filterCurrencyByBaseCurrency(currencies: [], baseCurrency: string): any {
+  private filterCurrenciesByBaseCurrency(currencies, baseCurrency: string): any {
     baseCurrency = baseCurrency.toLowerCase();
     const currenciesFilteredByBaseCurrency = {};
 
@@ -38,8 +40,22 @@ export class QuotesComponent implements OnInit {
     return currenciesFilteredByBaseCurrency;
   }
 
+  private filterCurrenciesByExchange(currencies): any {
+    const filtered = {};
+
+    this.exchanges.forEach(exchange => {
+      if (exchange.isSelected) {
+        filtered[exchange.name] = currencies[exchange.name];
+      }
+    });
+
+    return filtered;
+  }
+
   public toggleExhange(index): void {
-    // console.log(`Changing state of ${this.exchanges[index].name} to ${this.exchanges[index].isSelected}`);
+    console.log(this.filteredCurrencies);
+    this.filteredCurrencies = this.filterCurrenciesByExchange(this.baseCurrencyFilteredCurrencies);
+    console.log(this.filteredCurrencies);
   }
 
   ngOnInit(): void {
@@ -55,15 +71,13 @@ export class QuotesComponent implements OnInit {
         currencyObservable.subscribe({
           next: currencies => {
             this.rawCurrencies = currencies;
-            // this.currencies = this.flattenCurrenciesList(currencies);
           },
           complete: () => {
-            // this.filteredCurrencies = this.filterCurrencyByBaseCurrency(this.currencies, 'USD');
-            this.filteredCurrencies = this.filterCurrencyByBaseCurrency(this.rawCurrencies, 'USD');
-            console.log('Exchanges', this.exchanges);
-            console.log('Raw Currencies', this.rawCurrencies);
-            // console.log('Currenies', this.currencies);
-            console.log('Filterd Currencies', this.filteredCurrencies);
+            this.baseCurrencyFilteredCurrencies = this.filterCurrenciesByBaseCurrency(this.rawCurrencies, 'USD');
+            this.filteredCurrencies = this.baseCurrencyFilteredCurrencies;
+            // console.log('Exchanges', this.exchanges);
+            // console.log('Raw Currencies', this.rawCurrencies);
+            // console.log('Filterd Currencies', this.baseCurrencyFilteredCurrencies);
           },
         });
       });
