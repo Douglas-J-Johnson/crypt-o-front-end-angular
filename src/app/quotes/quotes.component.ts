@@ -9,36 +9,29 @@ import { forkJoin } from 'rxjs';
 })
 export class QuotesComponent implements OnInit {
   public exchanges = [];
-  public currencies: [];
+  public rawCurrencies: [];
   public filteredCurrencies: [];
   private exchangeRequests = {};
 
   constructor(private quotesService: QuotesService) { }
 
-  private flattenCurrenciesList(currencies: {}): any {
-    const flattenedCurrenciesList = [];
-
-    Object.keys(currencies).forEach (exchange => {
-      const exchangeCurrencies = currencies[exchange];
-      exchangeCurrencies.forEach(currency => {
-        const flattenedCurrency = currency;
-        flattenedCurrency['exchange'] = exchange;
-        flattenedCurrenciesList.push(flattenedCurrency);
-      });
-    });
-
-    return flattenedCurrenciesList;
-  }
-
   private filterCurrencyByBaseCurrency(currencies: [], baseCurrency: string): any {
     baseCurrency = baseCurrency.toLowerCase();
-    const currenciesFilteredByBaseCurrency = [];
+    const currenciesFilteredByBaseCurrency = {};
 
-    currencies.forEach(currency => {
-      const displaySymbol: string = currency['displaySymbol'];
+    Object.keys(currencies).forEach(exchange => {
+      const exchangeCurrencies = [];
 
-      if (displaySymbol.toLowerCase().includes(baseCurrency)) {
-        currenciesFilteredByBaseCurrency.push(currency);
+      currencies[exchange].forEach(currency => {
+        const displaySymbol: string = currency.displaySymbol;
+
+        if (displaySymbol.toLowerCase().includes(baseCurrency)) {
+          exchangeCurrencies.push(currency);
+        }
+      });
+
+      if (exchangeCurrencies.length > 0) {
+        currenciesFilteredByBaseCurrency[exchange] = exchangeCurrencies;
       }
     });
 
@@ -60,9 +53,17 @@ export class QuotesComponent implements OnInit {
 
         const currencyObservable = forkJoin(this.exchangeRequests);
         currencyObservable.subscribe({
-          next: value => this.currencies = this.flattenCurrenciesList(value),
+          next: currencies => {
+            this.rawCurrencies = currencies;
+            // this.currencies = this.flattenCurrenciesList(currencies);
+          },
           complete: () => {
-            this.filteredCurrencies = this.filterCurrencyByBaseCurrency(this.currencies, 'USD');
+            // this.filteredCurrencies = this.filterCurrencyByBaseCurrency(this.currencies, 'USD');
+            this.filteredCurrencies = this.filterCurrencyByBaseCurrency(this.rawCurrencies, 'USD');
+            console.log('Exchanges', this.exchanges);
+            console.log('Raw Currencies', this.rawCurrencies);
+            // console.log('Currenies', this.currencies);
+            console.log('Filterd Currencies', this.filteredCurrencies);
           },
         });
       });

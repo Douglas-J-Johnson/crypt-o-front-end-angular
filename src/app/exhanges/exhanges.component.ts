@@ -13,7 +13,7 @@ export class ExhangesComponent{
 
   public setSelected($event: Event, index: number): void {
     $event.stopPropagation();
-    this.exchanges[index]['isSelected'] = !this.exchanges[index]['isSelected'];
+    this.exchanges[index].isSelected = !this.exchanges[index].isSelected;
     this.click.emit(index);
   }
 
