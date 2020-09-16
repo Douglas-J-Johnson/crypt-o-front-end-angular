@@ -14,7 +14,7 @@ export class ExhangesComponent{
   public setSelected($event: Event, index: number): void {
     $event.stopPropagation();
     this.exchanges[index].isSelected = !this.exchanges[index].isSelected;
-    this.click.emit(index);
+    this.click.emit();
   }
 
   public setBulkSelection($event: Event, bulkSelectionAction: string): void {
@@ -30,6 +30,8 @@ export class ExhangesComponent{
         this.exchanges[i].isSelected = false;
       }
     }
+
+    this.click.emit();
   }
 
   public selectedCount(): number {

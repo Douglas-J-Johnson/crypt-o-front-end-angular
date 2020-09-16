@@ -53,9 +53,7 @@ export class QuotesComponent implements OnInit {
   }
 
   public toggleExhange(index): void {
-    console.log(this.filteredCurrencies);
     this.filteredCurrencies = this.filterCurrenciesByExchange(this.baseCurrencyFilteredCurrencies);
-    console.log(this.filteredCurrencies);
   }
 
   ngOnInit(): void {
