@@ -1,8 +1,24 @@
 <div class="exchanges-select">
-  <div class="message message-info">Selecting from <b>{{ selectedCount() }}</b> exhanges</div>
+  <div class="message message-info">
+    Selecting from<br>
+    #### currenies<br>
+    from {{ selectedCount() }} exchanges
+  </div>
   <div class="exchanges-bulk-selectors">
-    <div class="exchanges-bulk-selector selected">All</div>
-    <div class="exchanges-bulk-selector selected">None</div>
+    <div
+      class="exchanges-bulk-selector"
+      [class.selected]="!allAreSelected"
+      [class.deselected]="allAreSelected"
+      (click)="setBulkSelection('selectAll')">
+      All
+    </div>
+    <div
+      class="exchanges-bulk-selector"
+      [class.selected]="!noneAreSelected"
+      [class.deselected]="noneAreSelected"
+      (click)="setBulkSelection('selectNone')">
+      None
+    </div>
   </div>
 
   <ul>

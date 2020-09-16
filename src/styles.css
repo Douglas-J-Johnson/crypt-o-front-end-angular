@@ -30,9 +30,10 @@ app-currencies {
 .message {
   color:  rgb(22, 75, 62);
   font-family: 'Lato', sans-serif;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 400;
   font-style: italic;
+  line-height: 1.25;
   padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
