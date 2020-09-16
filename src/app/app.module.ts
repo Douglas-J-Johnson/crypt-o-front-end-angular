@@ -12,6 +12,7 @@ import { CurrenciesComponent } from './currencies/currencies.component';
 import { CurrenciesSearchComponent } from './currencies-search/currencies-search.component';
 
 import { QuotesService } from './quotes.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { QuotesService } from './quotes.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     QuotesService

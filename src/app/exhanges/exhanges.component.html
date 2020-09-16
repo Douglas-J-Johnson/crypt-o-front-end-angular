@@ -1,9 +1,17 @@
-<ul>
-  <li *ngFor="let exchange of exchanges; index as i"
-    class = "exchange"
-    [class.exchange-selected]="exchange.isSelected"
-    [class.exchange-deselected]="!exchange.isSelected"
-    (click)="setSelected($event, i)">
-    {{ exchange.name }}
-  </li>
-</ul>
+<div class="exchanges-select">
+  <div class="message message-info">Selecting from <b>{{ selectedCount() }}</b> exhanges</div>
+  <div class="exchanges-bulk-selectors">
+    <div class="exchanges-bulk-selector selected">All</div>
+    <div class="exchanges-bulk-selector selected">None</div>
+  </div>
+
+  <ul>
+    <li *ngFor="let exchange of exchanges; index as i"
+      class = "exchange"
+      [class.selected]="exchange.isSelected"
+      [class.deselected]="!exchange.isSelected"
+      (click)="setSelected($event, i)">
+      {{ exchange.name }}
+    </li>
+  </ul>
+</div>

@@ -1,12 +1,30 @@
-li {
+.exchanges-select {
+  display: flex;
+  flex-direction: column;
+}
+
+.exchanges-bulk-selectors {
+  display: flex;
+  flex-direction: row;
+}
+
+.exchange, .exchanges-bulk-selector {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  min-height: 2.0rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 0.35rem;
+  margin: 1rem;
   cursor: pointer;
 }
 
-.exchange-selected {
-  background-color: rgba(151, 206, 192, 1);
+.selected {
+  color: rgb(230, 230, 230);
+  background-color: rgb(22, 75, 62);
 }
 
-.exchange-deselected {
-  color: rgb(200, 200, 200);
-  background-color: rgba(151, 206, 192, 0.2);
+.deselected {
+  color: rgb(220, 220, 220);
+  background-color: rgba(22, 75, 62, 0.7);
 }

@@ -1,26 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
-html {
-  font-family: 'Lato', sans-serif;
-  color: rgb(250, 250, 250);
+body {
   background-color: rgb(151, 206, 192);
 }
 
-ul {
-  font-weight: 400;
-  list-style: none;
-  margin: 1rem;
-  padding: 0rem;
-}
-
-li {
+app-quotes {
+  width: 50%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: 700;
-  min-height: 2.0rem;
+}
+
+app-exchanges {
+  width: 40%;
+}
+
+
+app-portfolio {
+  width: 50%;
+}
+
+app-currencies-search {
+  color:  rgb(50, 50, 50);
+}
+
+app-currencies {
+  color:  rgb(50, 50, 50);
+}
+
+.message {
+  color:  rgb(22, 75, 62);
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
   padding: 0.5rem 1rem 0.5rem 1rem;
-  border-radius: 0.35rem;
-  margin: 1rem;
+}
+
+.message-info {
+  color:  rgb(50, 50, 50);
 }
