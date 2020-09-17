@@ -1,16 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-currencies',
   templateUrl: './currencies.component.html',
   styleUrls: ['./currencies.component.css']
 })
-export class CurrenciesComponent implements OnInit {
+export class CurrenciesComponent {
   @Input('currencies') currencies: [];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input('displayMax') displayMax: number;
 
 }

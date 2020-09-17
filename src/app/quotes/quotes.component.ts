@@ -12,6 +12,7 @@ export class QuotesComponent implements OnInit {
   public rawCurrencies: [];
   public baseCurrencyFilteredCurrencies: [];
   public filteredCurrencies: [];
+  public searchTerm = '';
 
   private exchangeRequests = {};
 
@@ -52,8 +53,33 @@ export class QuotesComponent implements OnInit {
     return filtered;
   }
 
-  public toggleExhange(index): void {
+  private filterCurrenciesByKeyword(currencies): any {
+    const filtered = {};
+
+    if (this.searchTerm === '') {
+      return currencies;
+    }
+    else {
+      // this.exchanges.forEach(exchange => {
+      //   if (exchange.isSelected) {
+      //     filtered[exchange.name] = currencies[exchange.name];
+      //   }
+      // });
+    }
+
+    return filtered;
+  }
+
+  private filterCurrencies(): any {
+    console.log(this.baseCurrencyFilteredCurrencies);
     this.filteredCurrencies = this.filterCurrenciesByExchange(this.baseCurrencyFilteredCurrencies);
+    console.log(this.filteredCurrencies);
+    this.filteredCurrencies = this.filterCurrenciesByKeyword(this.filteredCurrencies);
+    console.log(this.filteredCurrencies);
+  }
+
+  public toggleExhange(): void {
+    this.filterCurrencies();
   }
 
   ngOnInit(): void {
