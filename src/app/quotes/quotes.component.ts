@@ -12,7 +12,9 @@ export class QuotesComponent implements OnInit {
   public rawCurrencies: [];
   public baseCurrencyFilteredCurrencies: [];
   public filteredCurrencies: [];
+
   public searchTerm = '';
+  public filteredCurrenciesCount = 0;
 
   private exchangeRequests = {};
 
@@ -70,12 +72,24 @@ export class QuotesComponent implements OnInit {
     return filtered;
   }
 
+  private countCurrencies(currencies): number {
+    let count = 0;
+
+    Object.keys(currencies).forEach(exchange => {
+      count += currencies[exchange].length;
+    });
+
+    return count;
+  }
+
   private filterCurrencies(): any {
-    console.log(this.baseCurrencyFilteredCurrencies);
+    console.log(this.filteredCurrencies);
     this.filteredCurrencies = this.filterCurrenciesByExchange(this.baseCurrencyFilteredCurrencies);
     console.log(this.filteredCurrencies);
     this.filteredCurrencies = this.filterCurrenciesByKeyword(this.filteredCurrencies);
     console.log(this.filteredCurrencies);
+    this.filteredCurrenciesCount = this.countCurrencies(this.filteredCurrencies);
+    console.log('----------------------------------------------------')
   }
 
   public toggleExhange(): void {
@@ -99,6 +113,7 @@ export class QuotesComponent implements OnInit {
           complete: () => {
             this.baseCurrencyFilteredCurrencies = this.filterCurrenciesByBaseCurrency(this.rawCurrencies, 'USD');
             this.filteredCurrencies = this.baseCurrencyFilteredCurrencies;
+            this.filteredCurrenciesCount = this.countCurrencies(this.filteredCurrencies);
             // console.log('Exchanges', this.exchanges);
             // console.log('Raw Currencies', this.rawCurrencies);
             // console.log('Filterd Currencies', this.baseCurrencyFilteredCurrencies);
