@@ -1,5 +1,15 @@
-<app-exhanges [exchanges]="exchanges" (click)="toggleExhange()"></app-exhanges>
+<app-exhanges
+  [exchanges]="exchanges"
+  (click)="toggleExhange($event)">
+</app-exhanges>
 <div class="currenciesSelection">
-  <app-currencies-search [filteredCurrenciesCount]="filteredCurrenciesCount"></app-currencies-search>
-  <app-currencies [currencies]="filteredCurrencies" [displayMax]=10></app-currencies>
+  <app-currencies-search
+    [filteredCurrenciesCount]="filteredCurrenciesCount"
+    [searchText]="searchText"
+    (input)="searchCurrencies($event)">
+  </app-currencies-search>
+  <app-currencies
+    [currencies]="filteredCurrencies"
+    [displayMax]=10>
+  </app-currencies>
 </div>

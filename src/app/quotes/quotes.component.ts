@@ -13,7 +13,7 @@ export class QuotesComponent implements OnInit {
   public baseCurrencyFilteredCurrencies: [];
   public filteredCurrencies: [];
 
-  public searchTerm = '';
+  public searchText = '';
   public filteredCurrenciesCount = 0;
 
   private exchangeRequests = {};
@@ -55,10 +55,10 @@ export class QuotesComponent implements OnInit {
     return filtered;
   }
 
-  private filterCurrenciesByKeyword(currencies): any {
+  private filterCurrenciesBySearchText(currencies): any {
     const filtered = {};
 
-    if (this.searchTerm === '') {
+    if (this.searchText === '') {
       return currencies;
     }
     else {
@@ -86,13 +86,19 @@ export class QuotesComponent implements OnInit {
     console.log(this.filteredCurrencies);
     this.filteredCurrencies = this.filterCurrenciesByExchange(this.baseCurrencyFilteredCurrencies);
     console.log(this.filteredCurrencies);
-    this.filteredCurrencies = this.filterCurrenciesByKeyword(this.filteredCurrencies);
+    this.filteredCurrencies = this.filterCurrenciesBySearchText(this.filteredCurrencies);
     console.log(this.filteredCurrencies);
     this.filteredCurrenciesCount = this.countCurrencies(this.filteredCurrencies);
-    console.log('----------------------------------------------------')
+    console.log('----------------------------------------------------');
   }
 
-  public toggleExhange(): void {
+  public toggleExhange($event): void {
+    console.log('Filter by exchanges');
+    this.filterCurrencies();
+  }
+
+  public searchCurrencies($event): void {
+    console.log('Filter by search text');
     this.filterCurrencies();
   }
 

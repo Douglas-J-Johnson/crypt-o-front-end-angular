@@ -1,1 +1,12 @@
-
+.search-text {
+  background-color: rgb(230, 230, 230);
+  color:  rgb(50, 50, 50);
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  height: 2.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  border-color: rgb(22, 75, 62);
+  border-radius: 0.35rem;
+  margin: 1rem;
+}

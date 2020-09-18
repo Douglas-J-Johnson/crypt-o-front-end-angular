@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-currencies-search',
@@ -7,4 +7,12 @@ import { Component, Input } from '@angular/core';
 })
 export class CurrenciesSearchComponent {
   @Input('filteredCurrenciesCount') filteredCurrenciesCount: number;
+  @Input('searchText') searchText: string;
+  @Output() input = new EventEmitter();
+
+  public search($event): void {
+    $event.stopPropagation();
+    console.log(this.searchText);
+    this.input.emit();
+  }
 }

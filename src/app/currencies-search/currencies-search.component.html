@@ -2,3 +2,10 @@
   {{ filteredCurrenciesCount }} matching<br>
   currencies
 </div>
+
+<input
+  type="text"
+  [(ngModel)]="searchText"
+  class="search-text"
+  (input)="search($event)"
+/>
