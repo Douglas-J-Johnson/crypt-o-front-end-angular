@@ -1,1 +1,11 @@
-<p>currencies works!</p>
+<div *ngIf="currenciesToList(); else noCurrencies">
+  <div *ngIf="displayCurrencies(); else tooManyCurrencies">
+    List Currencies
+  </div>
+  <ng-template #tooManyCurrencies>
+    Too Many Currencies
+  </ng-template>
+</div>
+<ng-template #noCurrencies>
+  No currencies to display.
+</ng-template>

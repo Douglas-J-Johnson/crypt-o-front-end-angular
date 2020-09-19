@@ -99,12 +99,10 @@ export class QuotesComponent implements OnInit {
   }
 
   public toggleExhange($event): void {
-    console.log('Filter by exchanges');
     this.filterCurrencies();
   }
 
   public searchCurrencies(searchText): void {
-    console.log('Filter by search text', searchText);
     this.searchText = searchText;
     this.filterCurrencies();
   }
