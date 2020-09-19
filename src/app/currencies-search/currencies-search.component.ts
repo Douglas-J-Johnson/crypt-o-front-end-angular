@@ -12,7 +12,6 @@ export class CurrenciesSearchComponent {
 
   public search($event): void {
     $event.stopPropagation();
-    console.log(this.searchText);
-    this.input.emit();
+    this.input.emit(this.searchText);
   }
 }

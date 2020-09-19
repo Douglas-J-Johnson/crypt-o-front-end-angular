@@ -55,18 +55,28 @@ export class QuotesComponent implements OnInit {
     return filtered;
   }
 
-  private filterCurrenciesBySearchText(currencies): any {
+  private filterCurrenciesBySearchText(currencies, searchText: string): any {
     const filtered = {};
+    searchText = searchText.toLowerCase();
 
     if (this.searchText === '') {
       return currencies;
     }
     else {
-      // this.exchanges.forEach(exchange => {
-      //   if (exchange.isSelected) {
-      //     filtered[exchange.name] = currencies[exchange.name];
-      //   }
-      // });
+      Object.keys(currencies).forEach(exchange => {
+        const matchingCurrencies = [];
+
+        currencies[exchange].forEach(currency => {
+          const currencySymbol = currency.symbol.toLowerCase();
+          if (currencySymbol.includes(searchText)) {
+            matchingCurrencies.push(currency);
+          }
+        });
+
+        if (matchingCurrencies.length > 0) {
+          filtered[exchange] = matchingCurrencies;
+        }
+      });
     }
 
     return filtered;
@@ -83,13 +93,9 @@ export class QuotesComponent implements OnInit {
   }
 
   private filterCurrencies(): any {
-    console.log(this.filteredCurrencies);
     this.filteredCurrencies = this.filterCurrenciesByExchange(this.baseCurrencyFilteredCurrencies);
-    console.log(this.filteredCurrencies);
-    this.filteredCurrencies = this.filterCurrenciesBySearchText(this.filteredCurrencies);
-    console.log(this.filteredCurrencies);
+    this.filteredCurrencies = this.filterCurrenciesBySearchText(this.filteredCurrencies, this.searchText);
     this.filteredCurrenciesCount = this.countCurrencies(this.filteredCurrencies);
-    console.log('----------------------------------------------------');
   }
 
   public toggleExhange($event): void {
@@ -97,8 +103,9 @@ export class QuotesComponent implements OnInit {
     this.filterCurrencies();
   }
 
-  public searchCurrencies($event): void {
-    console.log('Filter by search text');
+  public searchCurrencies(searchText): void {
+    console.log('Filter by search text', searchText);
+    this.searchText = searchText;
     this.filterCurrencies();
   }
 
