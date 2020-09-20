@@ -9,19 +9,22 @@ import { forkJoin } from 'rxjs';
 })
 export class QuotesComponent implements OnInit {
   public exchanges = [];
-  public rawCurrencies: [];
-  public baseCurrencyFilteredCurrencies: [];
-  public filteredCurrencies: [];
+  public rawCurrencies = {};
+  public baseCurrencyFilteredCurrencies = {};
+  public filteredCurrencies = {};
+  public flattenedFilteredCurrencies = [];
 
   public searchText = '';
+  public baseCurrency = 'USD';
   public filteredCurrenciesCount = 0;
 
   private exchangeRequests = {};
 
   constructor(private quotesService: QuotesService) { }
 
-  private filterCurrenciesByBaseCurrency(currencies, baseCurrency: string): any {
-    baseCurrency = baseCurrency.toLowerCase();
+  private filterCurrenciesByBaseCurrency(): void {
+    const baseCurrency = this.baseCurrency.toLowerCase();
+    const currencies = this.rawCurrencies;
     const currenciesFilteredByBaseCurrency = {};
 
     Object.keys(currencies).forEach(exchange => {
@@ -40,10 +43,11 @@ export class QuotesComponent implements OnInit {
       }
     });
 
-    return currenciesFilteredByBaseCurrency;
+    this.baseCurrencyFilteredCurrencies = currenciesFilteredByBaseCurrency;
   }
 
-  private filterCurrenciesByExchange(currencies): any {
+  private filterCurrenciesByExchange(): void {
+    const currencies = this.baseCurrencyFilteredCurrencies;
     const filtered = {};
 
     this.exchanges.forEach(exchange => {
@@ -52,15 +56,17 @@ export class QuotesComponent implements OnInit {
       }
     });
 
-    return filtered;
+    this.filteredCurrencies = filtered;
   }
 
-  private filterCurrenciesBySearchText(currencies, searchText: string): any {
-    const filtered = {};
-    searchText = searchText.toLowerCase();
+  private filterCurrenciesBySearchText(): void {
+    const currencies = this.filteredCurrencies;
+    const searchText = this.searchText.toLowerCase();
+
+    let filtered = {};
 
     if (this.searchText === '') {
-      return currencies;
+      filtered = currencies;
     }
     else {
       Object.keys(currencies).forEach(exchange => {
@@ -79,23 +85,27 @@ export class QuotesComponent implements OnInit {
       });
     }
 
-    return filtered;
+    this.filteredCurrencies = filtered;
   }
 
-  private countCurrencies(currencies): number {
+  private countCurrencies(): void {
+    const currencies = this.filteredCurrencies;
     let count = 0;
 
     Object.keys(currencies).forEach(exchange => {
       count += currencies[exchange].length;
     });
 
-    return count;
+    this.filteredCurrenciesCount = count;
   }
 
-  private filterCurrencies(): any {
-    this.filteredCurrencies = this.filterCurrenciesByExchange(this.baseCurrencyFilteredCurrencies);
-    this.filteredCurrencies = this.filterCurrenciesBySearchText(this.filteredCurrencies, this.searchText);
-    this.filteredCurrenciesCount = this.countCurrencies(this.filteredCurrencies);
+  private filterCurrencies(): void {
+    console.log('Start Filter', this.filteredCurrencies);
+    this.filterCurrenciesByExchange();
+    console.log('After Exchanges', this.filteredCurrencies);
+    this.filterCurrenciesBySearchText();
+    console.log('After Search Text', this.filteredCurrencies);
+    this.countCurrencies();
   }
 
   public toggleExhange($event): void {
@@ -122,12 +132,13 @@ export class QuotesComponent implements OnInit {
             this.rawCurrencies = currencies;
           },
           complete: () => {
-            this.baseCurrencyFilteredCurrencies = this.filterCurrenciesByBaseCurrency(this.rawCurrencies, 'USD');
-            this.filteredCurrencies = this.baseCurrencyFilteredCurrencies;
-            this.filteredCurrenciesCount = this.countCurrencies(this.filteredCurrencies);
+            this.filterCurrenciesByBaseCurrency();
+            this.filterCurrencies();
             // console.log('Exchanges', this.exchanges);
             // console.log('Raw Currencies', this.rawCurrencies);
-            // console.log('Filterd Currencies', this.baseCurrencyFilteredCurrencies);
+            // console.log('Filterd Currencies by Base Currency', this.baseCurrencyFilteredCurrencies);
+            // console.log('Filtered Currencies', this.filterCurrencies);
+            // console.log('Filtered Currencies Count', this.filteredCurrenciesCount);
           },
         });
       });

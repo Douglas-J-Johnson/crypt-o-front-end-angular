@@ -1,11 +1,22 @@
 <div *ngIf="currenciesToList(); else noCurrencies">
   <div *ngIf="displayCurrencies(); else tooManyCurrencies">
-    List Currencies
+    <ul>
+      <li *ngFor="let currency of currencies; index as i"
+        class="currency">
+          Hello!
+      </li>
+    </ul>
   </div>
   <ng-template #tooManyCurrencies>
-    Too Many Currencies
+    <div class="message message-info">
+      Too many currencies.<br>
+      Refine search criteria.
+    </div>
   </ng-template>
 </div>
 <ng-template #noCurrencies>
-  No currencies to display.
+  <div class="message message-info">
+    No currencies to display.<br>
+    Refine search criteria.
+  </div>
 </ng-template>

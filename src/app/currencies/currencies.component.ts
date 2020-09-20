@@ -11,23 +11,15 @@ export class CurrenciesComponent {
   @Input('displayMax') displayMax: number;
 
   public currenciesToList(): boolean {
-    if (!this.currencies) {
-      return false;
-    } else {
-      if (Object.keys(this.currencies).length > 0) {
-        return true;
-      } else {
-        return false;
-      }
+    if (!this.currencies) { return false; }
+    else {
+      if (this.filteredCurrenciesCount > 0) { return true; }
+      else { return false; }
     }
   }
 
   public displayCurrencies(): boolean {
-    if (this.filteredCurrenciesCount <= this.displayMax) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    if (this.filteredCurrenciesCount <= this.displayMax) { return true; }
+    else { return false; }
   }
 }
