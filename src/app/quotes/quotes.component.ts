@@ -88,6 +88,19 @@ export class QuotesComponent implements OnInit {
     this.filteredCurrencies = filtered;
   }
 
+  private flattenFilteredCurrencies(): void {
+    const currencies = this.filteredCurrencies;
+    const flattenedCurrencies = [];
+
+    Object.keys(currencies).forEach(exchange => {
+      currencies[exchange].forEach(currency => {
+        flattenedCurrencies.push(currency);
+      });
+    });
+
+    this.flattenedFilteredCurrencies = flattenedCurrencies;
+  }
+
   private countCurrencies(): void {
     const currencies = this.filteredCurrencies;
     let count = 0;
@@ -100,11 +113,11 @@ export class QuotesComponent implements OnInit {
   }
 
   private filterCurrencies(): void {
-    console.log('Start Filter', this.filteredCurrencies);
     this.filterCurrenciesByExchange();
-    console.log('After Exchanges', this.filteredCurrencies);
     this.filterCurrenciesBySearchText();
-    console.log('After Search Text', this.filteredCurrencies);
+    this.flattenFilteredCurrencies();
+    console.log('Final', this.filteredCurrencies);
+    console.log('Final FLattened', this.flattenedFilteredCurrencies);
     this.countCurrencies();
   }
 
