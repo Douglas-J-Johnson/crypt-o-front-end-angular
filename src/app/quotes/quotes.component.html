@@ -9,8 +9,8 @@
     (input)="searchCurrencies($event)">
   </app-currencies-search>
   <app-currencies
-    [currencies]="filteredCurrencies"
+    [currencies]="flattenedFilteredCurrencies"
     [filteredCurrenciesCount]="filteredCurrenciesCount"
-    [displayMax]=10>
+    [displayMax]=24>
   </app-currencies>
 </div>

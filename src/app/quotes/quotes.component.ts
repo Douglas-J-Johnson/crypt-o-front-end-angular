@@ -116,8 +116,6 @@ export class QuotesComponent implements OnInit {
     this.filterCurrenciesByExchange();
     this.filterCurrenciesBySearchText();
     this.flattenFilteredCurrencies();
-    console.log('Final', this.filteredCurrencies);
-    console.log('Final FLattened', this.flattenedFilteredCurrencies);
     this.countCurrencies();
   }
 
@@ -133,6 +131,7 @@ export class QuotesComponent implements OnInit {
   ngOnInit(): void {
     this.quotesService.getExchanges()
       .subscribe(response => {
+        response.sort();
         response.forEach(exchange => {
           const exchangeName = exchange.toString();
           this.exchanges.push({name: exchangeName, isSelected: true});
