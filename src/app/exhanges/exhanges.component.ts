@@ -14,7 +14,6 @@ export class ExhangesComponent{
 
   public setSelected($event: Event, index: number): void {
     $event.stopPropagation();
-    this.exchanges[index].isSelected = !this.exchanges[index].isSelected;
     this.toggleExchange.emit(index);
   }
 
@@ -22,17 +21,11 @@ export class ExhangesComponent{
     $event.stopPropagation();
 
     if (bulkSelectionAction === 'selectAll' && !this.allAreSelected) {
-      for (let i = 0; i < this.exchanges.length; i++) {
-        this.exchanges[i].isSelected = true;
-      }
+      this.bulkSelectExchanges.emit(bulkSelectionAction);
     }
     if (bulkSelectionAction === 'selectNone' && !this.noneAreSelected) {
-      for (let i = 0; i < this.exchanges.length; i++) {
-        this.exchanges[i].isSelected = false;
-      }
+      this.bulkSelectExchanges.emit(bulkSelectionAction);
     }
-
-    this.bulkSelectExchanges.emit(bulkSelectionAction);
   }
 
   public selectedCount(): number {

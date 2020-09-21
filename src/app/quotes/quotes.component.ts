@@ -24,7 +24,7 @@ export class QuotesComponent implements OnInit {
 
   private addIndexAndPortfolioIndicator(): void {
     const currencies = this.rawCurrencies;
-    let appendedAttributesCurrencies = {};
+    const appendedAttributesCurrencies = {};
     let id = 1;
 
     Object.keys(currencies).forEach(exchange => {
@@ -144,11 +144,29 @@ export class QuotesComponent implements OnInit {
 
   public toggleExhange(index: number): void {
     console.log('Toggle Exchange', index);
+    this.exchanges[index].isSelected = !this.exchanges[index].isSelected;
     this.filterCurrencies();
   }
 
   public bulkSelectExchanges(scope: string): void {
     console.log('Bulk Select', scope);
+    let selectedValue = true;
+
+    if (scope === 'selectAll') {
+      selectedValue = true;
+    }
+    else if (scope === 'selectNone') {
+      selectedValue = false;
+    }
+    else {
+      return;
+    }
+
+    for (let i = 0; i < this.exchanges.length; i++) {
+      this.exchanges[i].isSelected = selectedValue;
+    }
+
+    this.filterCurrencies();
   }
 
   public searchCurrencies(searchText: string): void {
