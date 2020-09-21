@@ -1,7 +1,6 @@
 import { QuotesService } from './../quotes.service';
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-quotes',

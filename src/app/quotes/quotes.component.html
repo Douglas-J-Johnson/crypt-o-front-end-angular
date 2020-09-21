@@ -13,6 +13,7 @@
   </app-currencies-search>
   <app-currencies
     [currencies]="flattenedFilteredCurrencies"
+    [portfolioCurrencies]="portfolioCurrencies"
     [filteredCurrenciesCount]="filteredCurrenciesCount"
     [displayMax]=24
     (addCurrencyToPortfolio)="addCurrencyToPortfolio($event)"

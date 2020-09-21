@@ -5,7 +5,7 @@
         class="currency"
       >
         {{ currency.description }}
-        <div
+        <div *ngIf="!inPortfolio(i)"
           class="add-button"
           (click)="addToPortfolio($event, i)"
         >
