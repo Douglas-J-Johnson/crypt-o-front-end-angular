@@ -147,7 +147,12 @@ export class QuotesComponent implements OnInit {
     this.filterCurrencies();
   }
 
+  public bulkSelectExchanges(scope: string): void {
+    console.log('Bulk Select', scope);
+  }
+
   public searchCurrencies(searchText: string): void {
+    console.log('Search Currencies', searchText);
     this.searchText = searchText;
     this.filterCurrencies();
   }

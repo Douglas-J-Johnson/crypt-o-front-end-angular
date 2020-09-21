@@ -8,10 +8,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class CurrenciesSearchComponent {
   @Input('filteredCurrenciesCount') filteredCurrenciesCount: number;
   @Input('searchText') searchText: string;
-  @Output() input = new EventEmitter();
+  @Output() searchCurrencies = new EventEmitter();
 
   public search($event): void {
     $event.stopPropagation();
-    this.input.emit(this.searchText);
+    this.searchCurrencies.emit(this.searchText);
   }
 }

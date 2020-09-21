@@ -7,14 +7,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ExhangesComponent{
   @Input('exchanges') exchanges: any;
-  @Output() click = new EventEmitter();
+  @Output() toggleExchange = new EventEmitter();
+  @Output() bulkSelectExchanges = new EventEmitter();
   public allAreSelected: boolean;
   public noneAreSelected: boolean;
 
   public setSelected($event: Event, index: number): void {
     $event.stopPropagation();
     this.exchanges[index].isSelected = !this.exchanges[index].isSelected;
-    this.click.emit(index);
+    this.toggleExchange.emit(index);
   }
 
   public setBulkSelection($event: Event, bulkSelectionAction: string): void {
@@ -31,7 +32,7 @@ export class ExhangesComponent{
       }
     }
 
-    this.click.emit();
+    this.bulkSelectExchanges.emit(bulkSelectionAction);
   }
 
   public selectedCount(): number {

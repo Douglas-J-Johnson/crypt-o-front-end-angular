@@ -1,20 +1,21 @@
 <app-exhanges
   [exchanges]="exchanges"
-  (click)="toggleExhange($event)"
+  (toggleExchange)="toggleExhange($event)"
+  (bulkSelectExchanges)="bulkSelectExchanges($event)"
 >
 </app-exhanges>
 <div class="currenciesSelection">
   <app-currencies-search
     [filteredCurrenciesCount]="filteredCurrenciesCount"
     [searchText]="searchText"
-    (input)="searchCurrencies($event)"
+    (searchCurrencies)="searchCurrencies($event)"
   >
   </app-currencies-search>
   <app-currencies
     [currencies]="flattenedFilteredCurrencies"
     [filteredCurrenciesCount]="filteredCurrenciesCount"
     [displayMax]=24
-    (click)="addCurrencyToPortfolio($event)"
+    (addCurrencyToPortfolio)="addCurrencyToPortfolio($event)"
   >
   </app-currencies>
 </div>
