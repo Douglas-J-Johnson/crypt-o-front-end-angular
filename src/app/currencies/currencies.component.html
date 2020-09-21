@@ -4,7 +4,7 @@
       <li *ngFor="let currency of currencies; index as i"
         class="currency"
       >
-        {{ currency.symbol }}
+        {{ currency.description }}
         <div
           class="add-button"
           (click)="addToPortfolio($event, i)"

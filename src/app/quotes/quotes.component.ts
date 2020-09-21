@@ -22,6 +22,29 @@ export class QuotesComponent implements OnInit {
 
   constructor(private quotesService: QuotesService) { }
 
+  private addIndexAndPortfolioIndicator(): void {
+    const currencies = this.rawCurrencies;
+    let appendedAttributesCurrencies = {};
+    let id = 1;
+
+    Object.keys(currencies).forEach(exchange => {
+      const exchangeCurrencies = [];
+
+      currencies[exchange].forEach(currency => {
+        currency['id'] = id;
+        id += 1;
+        currency['inPortfolio'] = false;
+        exchangeCurrencies.push(currency);
+      });
+
+      if (exchangeCurrencies.length > 0) {
+        appendedAttributesCurrencies[exchange] = exchangeCurrencies;
+      }
+    });
+
+    this.rawCurrencies = appendedAttributesCurrencies;
+  }
+
   private filterCurrenciesByBaseCurrency(): void {
     const baseCurrency = this.baseCurrency.toLowerCase();
     const currencies = this.rawCurrencies;
@@ -119,13 +142,18 @@ export class QuotesComponent implements OnInit {
     this.countCurrencies();
   }
 
-  public toggleExhange($event): void {
+  public toggleExhange(index: number): void {
+    console.log('Toggle Exchange', index);
     this.filterCurrencies();
   }
 
-  public searchCurrencies(searchText): void {
+  public searchCurrencies(searchText: string): void {
     this.searchText = searchText;
     this.filterCurrencies();
+  }
+
+  public addCurrencyToPortfolio(index: number): void {
+    console.log('Add a currency to portfolio', index);
   }
 
   ngOnInit(): void {
@@ -144,13 +172,14 @@ export class QuotesComponent implements OnInit {
             this.rawCurrencies = currencies;
           },
           complete: () => {
+            this.addIndexAndPortfolioIndicator();
             this.filterCurrenciesByBaseCurrency();
             this.filterCurrencies();
-            // console.log('Exchanges', this.exchanges);
-            // console.log('Raw Currencies', this.rawCurrencies);
-            // console.log('Filterd Currencies by Base Currency', this.baseCurrencyFilteredCurrencies);
-            // console.log('Filtered Currencies', this.filterCurrencies);
-            // console.log('Filtered Currencies Count', this.filteredCurrenciesCount);
+            console.log('Exchanges', this.exchanges);
+            console.log('Raw Currencies', this.rawCurrencies);
+            console.log('Filterd Currencies by Base Currency', this.baseCurrencyFilteredCurrencies);
+            console.log('Filtered Currencies', this.filteredCurrencies);
+            console.log('Filtered Currencies Count', this.filteredCurrenciesCount);
           },
         });
       });

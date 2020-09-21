@@ -9,7 +9,7 @@ export class CurrenciesComponent {
   @Input('filteredCurrenciesCount') filteredCurrenciesCount: number;
   @Input('currencies') currencies: [];
   @Input('displayMax') displayMax: number;
-  @Output('addToPortfolio') click = new EventEmitter();
+  @Output() click = new EventEmitter();
 
   public currenciesToList(): boolean {
     if (!this.currencies) { return false; }
@@ -26,7 +26,6 @@ export class CurrenciesComponent {
 
   public addToPortfolio($event, index: number): void {
     $event.stopPropagation();
-    console.log('Add to Portfolio', this.currencies[index]);
-    this.click.emit();
+    this.click.emit(this.currencies[index].id);
   }
 }
