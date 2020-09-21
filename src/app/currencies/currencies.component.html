@@ -2,8 +2,15 @@
   <div *ngIf="displayCurrencies(); else tooManyCurrencies">
     <ul>
       <li *ngFor="let currency of currencies; index as i"
-        class="currency">
-          {{ currency.symbol }}
+        class="currency"
+      >
+        {{ currency.symbol }}
+        <div
+          class="add-button"
+          (click)="addToPortfolio($event, i)"
+        >
+          +
+        </div>
       </li>
     </ul>
   </div>

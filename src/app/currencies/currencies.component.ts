@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-currencies',
@@ -9,6 +9,7 @@ export class CurrenciesComponent {
   @Input('filteredCurrenciesCount') filteredCurrenciesCount: number;
   @Input('currencies') currencies: [];
   @Input('displayMax') displayMax: number;
+  @Output('addToPortfolio') click = new EventEmitter();
 
   public currenciesToList(): boolean {
     if (!this.currencies) { return false; }
@@ -21,5 +22,11 @@ export class CurrenciesComponent {
   public displayCurrencies(): boolean {
     if (this.filteredCurrenciesCount <= this.displayMax) { return true; }
     else { return false; }
+  }
+
+  public addToPortfolio($event, index: number): void {
+    $event.stopPropagation();
+    console.log('Add to Portfolio', this.currencies[index]);
+    this.click.emit();
   }
 }
