@@ -1,6 +1,7 @@
 import { QuotesService } from './../quotes.service';
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-quotes',
@@ -13,6 +14,7 @@ export class QuotesComponent implements OnInit {
   public baseCurrencyFilteredCurrencies = {};
   public filteredCurrencies = {};
   public flattenedFilteredCurrencies = [];
+  public portfolioCurrencies = {};
 
   public searchText = '';
   public baseCurrency = 'USD';
@@ -22,7 +24,7 @@ export class QuotesComponent implements OnInit {
 
   constructor(private quotesService: QuotesService) { }
 
-  private addIndexAndPortfolioIndicator(): void {
+  private addCurrencyIndex(): void {
     const currencies = this.rawCurrencies;
     const appendedAttributesCurrencies = {};
     let id = 1;
@@ -31,9 +33,8 @@ export class QuotesComponent implements OnInit {
       const exchangeCurrencies = [];
 
       currencies[exchange].forEach(currency => {
-        currency['id'] = id;
+        currency.id = id;
         id += 1;
-        currency['inPortfolio'] = false;
         exchangeCurrencies.push(currency);
       });
 
@@ -177,6 +178,15 @@ export class QuotesComponent implements OnInit {
 
   public addCurrencyToPortfolio(index: number): void {
     console.log('Add a currency to portfolio', index);
+    let targetCurrency = {};
+
+    this.flattenedFilteredCurrencies.forEach(currency => {
+      if (currency.id === index) {
+        targetCurrency = currency;
+      }
+    });
+
+    this.portfolioCurrencies[index] = targetCurrency;
   }
 
   ngOnInit(): void {
@@ -195,7 +205,7 @@ export class QuotesComponent implements OnInit {
             this.rawCurrencies = currencies;
           },
           complete: () => {
-            this.addIndexAndPortfolioIndicator();
+            this.addCurrencyIndex();
             this.filterCurrenciesByBaseCurrency();
             this.filterCurrencies();
             console.log('Exchanges', this.exchanges);
