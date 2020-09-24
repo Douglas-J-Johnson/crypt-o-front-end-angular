@@ -1,4 +1,3 @@
-import { PortfolioComponent } from './../portfolio/portfolio.component';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({

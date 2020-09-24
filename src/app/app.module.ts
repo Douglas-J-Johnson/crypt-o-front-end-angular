@@ -5,8 +5,11 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { PortfolioPieChartComponent } from './portfolio-pie-chart/portfolio-pie-chart.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { CurrenciesSearchComponent } from './currencies-search/currencies-search.component';
+import { PlotlyModule } from 'angular-plotly.js';
+import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { QuotesService } from './quotes.service';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -26,11 +31,13 @@ import { QuotesService } from './quotes.service';
     CurrenciesSearchComponent
   ],
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule,
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PlotlyModule
   ],
   providers: [
     QuotesService

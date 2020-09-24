@@ -175,6 +175,31 @@ export class QuotesComponent implements OnInit {
     this.filterCurrencies();
   }
 
+  public sortPortfolioAllocations(): void {
+    const portfolioAllocations = this.portfolioAllocations;
+    const sortedPortfolioAllocations = [];
+    const descriptions = [];
+    const descriptionsMap = {};
+    let counter = 0;
+
+    for (let i = 0; i < portfolioAllocations.length; i++) {
+      const portfolioAllocation = portfolioAllocations[i];
+      descriptions.push(portfolioAllocation.description.toLowerCase());
+      descriptionsMap[portfolioAllocation.description.toLowerCase()] = i;
+    }
+
+    console.log('Map', descriptionsMap);
+
+    descriptions.sort();
+    descriptions.forEach(description => {
+      const index = descriptionsMap[description];
+      sortedPortfolioAllocations[counter] = portfolioAllocations[index];
+      counter += 1;
+    });
+
+    this.portfolioAllocations = sortedPortfolioAllocations;
+  }
+
   public addCurrencyToPortfolio(index: number): void {
     console.log('Add a currency to portfolio', index);
     let targetCurrency = {};
@@ -187,6 +212,7 @@ export class QuotesComponent implements OnInit {
 
     targetCurrency['allocation'] = 0.00;
     this.portfolioAllocations.push(targetCurrency);
+    this.sortPortfolioAllocations();
     console.log(this.portfolioAllocations);
   }
 
