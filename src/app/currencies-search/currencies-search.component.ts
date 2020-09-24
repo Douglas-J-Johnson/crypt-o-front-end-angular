@@ -6,8 +6,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./currencies-search.component.css']
 })
 export class CurrenciesSearchComponent {
-  @Input('filteredCurrenciesCount') filteredCurrenciesCount: number;
-  @Input('searchText') searchText: string;
+  @Input() filteredCurrenciesCount: number;
+  @Input() searchText: string;
   @Output() searchCurrencies = new EventEmitter();
 
   public search($event): void {

@@ -1,7 +1,17 @@
 <div class="exchanges-select">
-  <div class="message message-info">
-    Selecting from <br>{{ selectedCount() }} exchanges
-  </div>
+  <div *ngIf="selectedCount() > 0; then exchangesSelected else noExchangesSelected"></div>
+  <ng-template #exchangesSelected>
+    <div class="message message-info">
+      Selecting from <br>
+      {{ selectedCount() }} exchanges
+    </div>
+  </ng-template>
+  <ng-template #noExchangesSelected>
+    <div class="message message-error">
+      Select at least<br>
+      one exchange
+    </div>
+  </ng-template>
   <div class="exchanges-bulk-selectors">
     <div
       class="exchanges-bulk-selector"

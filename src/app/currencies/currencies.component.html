@@ -1,7 +1,7 @@
 <div *ngIf="currenciesToList(); else noCurrencies">
   <div *ngIf="displayCurrencies(); else tooManyCurrencies">
     <ul>
-      <li *ngFor="let currency of currencies; index as i"
+      <li *ngFor="let currency of currencies; index as i;"
         class="currency"
       >
         {{ currency.description }}

@@ -1,6 +1,38 @@
-<app-portfolio-pie-chart [allocations]=allocations></app-portfolio-pie-chart>
+<app-portfolio-pie-chart [allocations]="allocations"></app-portfolio-pie-chart>
 <ul>
-  <li *ngFor="let allocation of this.allocations">
-    {{ allocation.symbol }}
+  <div *ngIf="incompleteAllocation(); then incomplete else nonIncomplete"></div>
+  <ng-template #incomplete>
+    <div class="message message-info">
+      Allocations must total 100%<br>
+      Current allocations total {{ totalAllocation() }}%
+    </div>
+  </ng-template>
+  <ng-template #nonIncomplete>
+    <div class="message message-info">
+      <br>
+      <br>
+    </div>
+  </ng-template>
+  <div *ngIf="zeroAllocation()" class="message message-info">
+    No allocations can be 0%
+  </div>
+  <li *ngFor="let allocation of this.allocations; odd as isOdd"
+    class="portfolio-allocation"
+    [class.odd]="isOdd"
+  >
+    <div>
+      {{ allocation.symbol }}
+    </div>
+    <div>
+      <input
+        type="number"
+        class="allocation-percentage"
+        [class.odd]="isOdd"
+        min="0"
+        max="100"
+        [(ngModel)]="allocation.allocation"
+      >
+      %
+    </div>
   </li>
 </ul>

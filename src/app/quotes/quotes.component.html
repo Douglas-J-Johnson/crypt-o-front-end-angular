@@ -4,7 +4,7 @@
   (bulkSelectExchanges)="bulkSelectExchanges($event)"
 >
 </app-exhanges>
-<div class="currenciesSelection">
+<div class="currencies-selection">
   <app-currencies-search
     [filteredCurrenciesCount]="filteredCurrenciesCount"
     [searchText]="searchText"
@@ -13,10 +13,14 @@
   </app-currencies-search>
   <app-currencies
     [currencies]="flattenedFilteredCurrencies"
-    [portfolioCurrencies]="portfolioCurrencies"
+    [portfolioAllocations]="portfolioAllocations"
     [filteredCurrenciesCount]="filteredCurrenciesCount"
     [displayMax]=24
     (addCurrencyToPortfolio)="addCurrencyToPortfolio($event)"
   >
   </app-currencies>
 </div>
+<app-portfolio
+  [allocations]="portfolioAllocations"
+>
+</app-portfolio>

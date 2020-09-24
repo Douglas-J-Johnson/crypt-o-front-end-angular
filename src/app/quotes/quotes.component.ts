@@ -13,7 +13,7 @@ export class QuotesComponent implements OnInit {
   public baseCurrencyFilteredCurrencies = {};
   public filteredCurrencies = {};
   public flattenedFilteredCurrencies = [];
-  public portfolioCurrencies = {};
+  public portfolioAllocations = [];
 
   public searchText = '';
   public baseCurrency = 'USD';
@@ -185,7 +185,9 @@ export class QuotesComponent implements OnInit {
       }
     });
 
-    this.portfolioCurrencies[index] = targetCurrency;
+    targetCurrency['allocation'] = 0.00;
+    this.portfolioAllocations.push(targetCurrency);
+    console.log(this.portfolioAllocations);
   }
 
   ngOnInit(): void {

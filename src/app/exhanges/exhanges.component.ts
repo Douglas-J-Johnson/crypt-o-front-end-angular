@@ -6,7 +6,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./exhanges.component.css']
 })
 export class ExhangesComponent{
-  @Input('exchanges') exchanges: any;
+  @Input() exchanges: any;
   @Output() toggleExchange = new EventEmitter();
   @Output() bulkSelectExchanges = new EventEmitter();
   public allAreSelected: boolean;

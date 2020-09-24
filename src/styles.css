@@ -4,29 +4,6 @@ body {
   background-color: rgb(151, 206, 192);
 }
 
-app-quotes {
-  width: 40%;
-  display: flex;
-  flex-direction: row;
-}
-
-app-exchanges {
-  width: 40%;
-}
-
-app-portfolio {
-  width: 50%;
-}
-
-app-currencies-search {
-  width: 80%;
-  color:  rgb(50, 50, 50);
-}
-
-app-currencies {
-  color: rgb(50, 50, 50);
-}
-
 .message {
   color: rgb(22, 75, 62);
   font-family: 'Lato', sans-serif;
@@ -34,9 +11,17 @@ app-currencies {
   font-weight: 400;
   font-style: italic;
   line-height: 1.25;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
 }
 
 .message-info {
   color:  rgb(50, 50, 50);
+}
+
+.message-warn {
+  color:  rgb(167, 128, 0);
+}
+
+.message-error {
+  color:  rgb(180, 0, 0);
 }
