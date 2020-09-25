@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-portfolio',
@@ -6,7 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent {
-  @Input() public allocations: [];
+  @Input() allocations: [];
+  @Output() removeCurrencyFromPortfolio = new EventEmitter();
 
   public zeroAllocation(): boolean {
     // let returnValue = true;
@@ -18,6 +19,11 @@ export class PortfolioComponent {
     // console.log(returnValue);
     // return returnValue;
     return false;
+  }
+
+  public removeCurrency($event: Event, index: number): void {
+    $event.stopPropagation();
+    this.removeCurrencyFromPortfolio.emit(index);
   }
 
   public totalAllocation(): number {

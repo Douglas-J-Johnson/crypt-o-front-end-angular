@@ -216,6 +216,20 @@ export class QuotesComponent implements OnInit {
     console.log(this.portfolioAllocations);
   }
 
+  public removeCurrencyFromPortfolio(index: number): void {
+    console.log('Remove a currency from portfolio', index);
+    const currentPortfolioAllocations = this.portfolioAllocations;
+    const newPortfolioAllocations = [];
+
+    for (let i = 0; i < currentPortfolioAllocations.length; i++) {
+      if (i !== index) {
+        newPortfolioAllocations.push(currentPortfolioAllocations[i]);
+      }
+    }
+
+    this.portfolioAllocations = newPortfolioAllocations;
+  }
+
   ngOnInit(): void {
     this.quotesService.getExchanges()
       .subscribe(response => {

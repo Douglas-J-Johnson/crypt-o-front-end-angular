@@ -16,10 +16,13 @@
   <div *ngIf="zeroAllocation()" class="message message-info">
     No allocations can be 0%
   </div>
-  <li *ngFor="let allocation of this.allocations; odd as isOdd"
+  <li *ngFor="let allocation of this.allocations; odd as isOdd; index as i;"
     class="portfolio-allocation"
     [class.odd]="isOdd"
   >
+    <div class="close-button" (click)="removeCurrency($event, i)">
+      X
+    </div>
     <div>
       {{ allocation.description }}
     </div>
