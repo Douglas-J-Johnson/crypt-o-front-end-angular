@@ -2,7 +2,6 @@ import { AppComponent } from './app.component';
 import { QuotesComponent } from './quotes/quotes.component';
 import { ExhangesComponent } from './exhanges/exhanges.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
-import { PortfolioPieChartComponent } from './portfolio-pie-chart/portfolio-pie-chart.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { CurrenciesSearchComponent } from './currencies-search/currencies-search.component';
 import { PlotlyModule } from 'angular-plotly.js';
@@ -26,9 +25,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     QuotesComponent,
     ExhangesComponent,
     PortfolioComponent,
-    PortfolioPieChartComponent,
     CurrenciesComponent,
-    CurrenciesSearchComponent
+    CurrenciesSearchComponent,
   ],
   imports: [
     CommonModule,
