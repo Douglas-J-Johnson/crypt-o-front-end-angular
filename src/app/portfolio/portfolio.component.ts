@@ -26,7 +26,7 @@ export class PortfolioComponent implements OnInit, OnChanges {
     const currencyAllocations: Array<number> = [];
     const allocations = this.allocations;
 
-    if(this.incompleteAllocation()) {
+    if (this.incompleteAllocation()) {
       currencyAllocations.push(100 - this.totalAllocation());
     }
 
@@ -34,7 +34,6 @@ export class PortfolioComponent implements OnInit, OnChanges {
       currencyAllocations.push(allocations[i]['allocation']);
     }
 
-    console.log('Allocations -->', currencyAllocations);
     this.currencyAllocations = currencyAllocations;
   }
 
@@ -42,7 +41,7 @@ export class PortfolioComponent implements OnInit, OnChanges {
     const currencyNames: Array<string> = [];
     const allocations = this.allocations;
 
-    if(this.incompleteAllocation()) {
+    if (this.incompleteAllocation()) {
       currencyNames.push('UNALLOCATED');
     }
 
@@ -50,7 +49,6 @@ export class PortfolioComponent implements OnInit, OnChanges {
       currencyNames.push(allocations[i]['symbol']);
     }
 
-    console.log('Names -->', currencyNames);
     this.currencyNames = currencyNames;
   }
 
@@ -84,19 +82,16 @@ export class PortfolioComponent implements OnInit, OnChanges {
   }
 
   public updatePercent(): void {
-    console.log('Percent Update');
     this.getCurrencyAllocations();
     this.getCurrencyNames();
   }
 
   ngOnInit(): void {
-    console.log('Init');
     this.getCurrencyAllocations();
     this.getCurrencyNames();
   }
 
   ngOnChanges(): void {
-    console.log('Change');
     this.getCurrencyAllocations();
     this.getCurrencyNames();
   }
