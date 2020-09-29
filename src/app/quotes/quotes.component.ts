@@ -16,7 +16,6 @@ export class QuotesComponent implements OnInit {
   public portfolioAllocations = [];
 
   public searchText = '';
-  public baseCurrency = 'USD';
   public filteredCurrenciesCount = 0;
 
   private exchangeRequests = {};
@@ -46,7 +45,6 @@ export class QuotesComponent implements OnInit {
   }
 
   private filterCurrenciesByBaseCurrency(): void {
-    const baseCurrency = this.baseCurrency.toLowerCase();
     const currencies = this.rawCurrencies;
     const currenciesFilteredByBaseCurrency = {};
 
@@ -54,15 +52,18 @@ export class QuotesComponent implements OnInit {
       const exchangeCurrencies = [];
 
       currencies[exchange].forEach(currency => {
-        const displaySymbol: string = currency.displaySymbol;
+        const displaySymbol: string = currency.displaySymbol.toLowerCase();
 
-        if (displaySymbol.toLowerCase().includes(baseCurrency)) {
+        if (displaySymbol.match(/^usd\//) || displaySymbol.match(/\/usd$/)) {
           exchangeCurrencies.push(currency);
         }
       });
 
       if (exchangeCurrencies.length > 0) {
         currenciesFilteredByBaseCurrency[exchange] = exchangeCurrencies;
+      }
+      else {
+        currenciesFilteredByBaseCurrency[exchange] = [];
       }
     });
 
@@ -115,7 +116,10 @@ export class QuotesComponent implements OnInit {
     const currencies = this.filteredCurrencies;
     const flattenedCurrencies = [];
 
+    console.log('******', currencies);
+
     Object.keys(currencies).forEach(exchange => {
+      console.log('--', currencies[exchange]);
       currencies[exchange].forEach(currency => {
         flattenedCurrencies.push(currency);
       });
